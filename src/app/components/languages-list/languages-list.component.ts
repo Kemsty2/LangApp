@@ -14,6 +14,7 @@ import {
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LanguageLevelOptions, LanguageOptions } from 'src/app/helpers/constants';
 
 @Component({
   selector: 'app-languages-list',
@@ -30,6 +31,8 @@ export class LanguagesListComponent implements OnInit {
   chevronRightIcon = faChevronCircleRight;
   modalIsOpened = false;
   selectedId = '';
+  languagesOptions = LanguageOptions;
+  languagesLevelOptions = LanguageLevelOptions;
 
   currentLanguage: any = {
     language: '',
@@ -54,6 +57,8 @@ export class LanguagesListComponent implements OnInit {
       writeLevel: new FormControl('', [Validators.required]),
       comprehensionLevel: new FormControl('', [Validators.required]),
     });
+
+    console.log(this.languagesOptions);
   }
 
   getAllLanguages(): void {
@@ -75,10 +80,10 @@ export class LanguagesListComponent implements OnInit {
 
     if (action === 'edit') {
       this.languageForm.patchValue({
-        language: '1',
-        speakLevel: '1',
-        writeLevel: '1',
-        comprehensionLevel: '1',
+        language: this.currentLanguage.language,
+        speakLevel: this.currentLanguage.speakLevel,
+        writeLevel: this.currentLanguage.writeLevel,
+        comprehensionLevel: this.currentLanguage.comprehensionLevel,
       });
     }
 

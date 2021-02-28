@@ -18,19 +18,19 @@
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col-md-2 col-sm-12">
-            <span class="text-bold">{{language.language}}</span>
+            <span class="text-bold">{{languagesOptions[language.language]}}</span>
           </div>
           <div class="col-md-2 col-sm-12">
             <span class="mr-1 text-bold">Speak Level : </span>
-            <span>{{language.speakLevel}}</span>
+            <span>{{languagesLevelOptions[language.speakLevel]}}</span>
           </div>
           <div class="col-md-2 col-sm-12">
             <span class="mr-1 text-bold">Write Level : </span>
-            <span>{{language.writeLevel}}</span>
+            <span>{{languagesLevelOptions[language.writeLevel]}}</span>
           </div>
           <div class="col-md-2 col-sm-12">
             <span class="mr-1 text-bold">Comprehension Level: </span>
-            <span>{{language.comprehensionLevel}}</span>
+            <span>{{languagesLevelOptions[language.comprehensionLevel]}}</span>
           </div>
           <div class="col-md-4 col-sm-12 row">
             <div class="col-md-4 col-sm-4 d-grid gap-2">
@@ -81,26 +81,29 @@
     <div class="row g-3" *ngIf="action === 'view'">
       <div class="col-md-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="language" placeholder="Language" value="French" readonly>
+          <input type="text" class="form-control" id="language" placeholder="Language"
+            [value]="languagesOptions[currentLanguage.language]" readonly>
           <label for="language">Language</label>
         </div>
       </div>
       <div class="col-md-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="speakLevel" placeholder="Speak Level" value="Basic" readonly>
+          <input type="text" class="form-control" id="speakLevel" placeholder="Speak Level"
+            [value]="languagesLevelOptions[currentLanguage.speakLevel]" readonly>
           <label for="speakLevel">Speak Level</label>
         </div>
       </div>
       <div class="col-md-12">
         <div class="form-floating">
-          <input type="text" class="form-control" id="writeLevel" placeholder="Write Level" value="Basic" readonly>
+          <input type="text" class="form-control" id="writeLevel" placeholder="Write Level"
+            [value]="languagesLevelOptions[currentLanguage.writeLevel]" readonly>
           <label for="writeLevel">Write Level</label>
         </div>
       </div>
       <div class="col-md-12">
         <div class="form-floating">
           <input type="text" class="form-control" id="comprehensionLevel" placeholder="Comprehension Level"
-            value="Basic" readonly>
+            [value]="languagesLevelOptions[currentLanguage.comprehensionLevel]" readonly>
           <label for="comprehensionLevel">Comprehension Level</label>
         </div>
       </div>
@@ -114,9 +117,7 @@
             'is-invalid': language.invalid && (language.dirty || language.touched) && language.errors.required}"
           id="language" formControlName="language">
           <option value=''>Select Language</option>
-          <option value="1">French</option>
-          <option value="2">English</option>
-          <option value="3">Dutch</option>
+          <option *ngFor="let option of languagesOptions | keyvalue" [value]="option.key">{{option.value}}</option>
         </select>
         <label for="language">Language</label>
         <div class="invalid-feedback"
@@ -132,9 +133,7 @@
             'is-invalid': speakLevel.invalid && (speakLevel.dirty || speakLevel.touched) && speakLevel.errors.required}"
           id="speakLevel" formControlName="speakLevel">
           <option value=''>Select Speak Level</option>
-          <option value="1">Basic</option>
-          <option value="2">Intermediate</option>
-          <option value="3">PreIntermediate</option>
+          <option *ngFor="let option of languagesLevelOptions | keyvalue" [value]="option.key">{{option.value}}</option>
         </select>
         <label for="speakLevel">SpeakLevel</label>
         <div class="invalid-feedback"
@@ -150,9 +149,7 @@
             'is-invalid': writeLevel.invalid && (writeLevel.dirty || writeLevel.touched) && writeLevel.errors.required}"
           id="writeLevel" formControlName="writeLevel">
           <option value=''>Select Write Level</option>
-          <option value="1">Basic</option>
-          <option value="2">Intermediate</option>
-          <option value="3">PreIntermediate</option>
+          <option *ngFor="let option of languagesLevelOptions | keyvalue" [value]="option.key">{{option.value}}</option>
         </select>
         <label for="writeLevel">WriteLevel</label>
         <div class="invalid-feedback"
@@ -168,9 +165,8 @@
             'is-invalid': comprehensionLevel.invalid && (comprehensionLevel.dirty || comprehensionLevel.touched) && comprehensionLevel.errors.required}"
           id="comprehensionLevel" formControlName="comprehensionLevel">
           <option value=''>Select Comprehension Level</option>
-          <option value="1">Basic</option>
-          <option value="2">Intermediate</option>
-          <option value="3">PreIntermediate</option>
+          <option *ngFor="let option of languagesLevelOptions | keyvalue" [value]="option.key">{{option.value}}</option>
+
         </select>
         <label for="comprehensionLevel">ComprehensionLevel</label>
         <div class="invalid-feedback"

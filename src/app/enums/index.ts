@@ -1,14 +1,14 @@
 export enum LangEnum {
-  French,
-  English,
-  Dutch,
+  French = 1,
+  English = 2,
+  Dutch = 3,
 }
 
 export enum LangLevel {
-  Starter,
-  Basic,
-  PreIntermediate,
-  Intermediate,
-  UpperIntermediate,
-  Advanced,
+  Starter = 1,
+  Basic = 2,
+  PreIntermediate = 3,
+  Intermediate = 4,
+  UpperIntermediate = 5,
+  Advanced = 6,
 }
