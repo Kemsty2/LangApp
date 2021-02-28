@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../services/authentication.service';
-import { AuthenticateResponse } from '../services/contracts/authentication.service.contracts';
-import { TokenStorageService } from '../services/token-storage.service';
+import { Response } from 'src/app/interfaces/response';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticateResponse } from 'src/app/services/contracts/authentication.service.contracts';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -33,22 +35,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.authenticationService.login(this.loginForm.value).subscribe(
-      (data: AuthenticateResponse) => {
-        console.log(data);
-        this.tokenStorageService.saveToken(data.jwtToken);
-        this.tokenStorageService.saveUser({
-          userName: data.userName,
-          email: data.email,
-          roles: data.roles,
-          refreshToken: data.refreshToken,
-          id: data.id,
-        });
+      (response: Response<AuthenticateResponse>) => {
+        console.log(response);
+        this.tokenStorageService.saveToken(response.data.jwtToken);
+        this.tokenStorageService.saveUser(new User(response.data));
         
         this.isSuccessful = true;
         this.isLoginFailed = false;
         this.isSubmitted = true;
 
-        this.reloadPage();
+        //this.reloadPage();
       },
       (err) => {
         this.errorMessage = err.error.message;

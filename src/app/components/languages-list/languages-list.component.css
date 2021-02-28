@@ -1,0 +1,11 @@
+.langs-list {
+  margin-top: 1rem;
+}
+
+.langs-list .langs-list-item {
+  margin-bottom: 1rem;
+}
+
+.text-bold {
+  font-weight: bolder;
+}
