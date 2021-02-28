@@ -39,12 +39,12 @@ export class LoginComponent implements OnInit {
         console.log(response);
         this.tokenStorageService.saveToken(response.data.jwtToken);
         this.tokenStorageService.saveUser(new User(response.data));
-        
+
         this.isSuccessful = true;
         this.isLoginFailed = false;
         this.isSubmitted = true;
 
-        //this.reloadPage();
+        this.goTo('/');
       },
       (err) => {
         this.errorMessage = err.error.message;
@@ -60,6 +60,10 @@ export class LoginComponent implements OnInit {
 
   get password() {
     return this.loginForm.get('password');
+  }
+
+  goTo(location: string) {
+    window.location.href = location;
   }
 
   reloadPage(): void {

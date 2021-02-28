@@ -5,8 +5,7 @@
     <button type="button" class="btn btn-outline-dark" disabled>
       Number of Languages <span class="badge bg-success text-white">{{languages ? languages.data.length : 0}}</span>
     </button>
-    <button type="button" [ngClass]="{'btn btn-sm btn-outline-success': true, 'active': modalIsOpened }"
-      data-bs-toggle="button">
+    <button type="button" [ngClass]="{'btn btn-sm btn-outline-success': true, 'active': modalIsOpened }">
       {{modalIsOpened ? 'Modal Opened' : 'Modal Closed'}}
     </button>
 

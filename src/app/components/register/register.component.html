@@ -1,84 +1,133 @@
-<div class="col-md-12">
-    <div class="card card-container">
-        <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-        <form [formGroup]="registerForm" *ngIf="!isSuccessful" (ngSubmit)="registerForm.valid && onSubmit()">
-            <div class="form-group">
-                <label for="userName">Username</label>
-                <input type="text" class="form-control" formControlName="userName" />
-                <div class="alert-danger" *ngIf="userName.invalid && (userName.dirty || userName.touched)">
-                    <div *ngIf="userName.errors.required">Username is required</div>
-                    <div *ngIf="userName.errors.minlength">
-                        Username must be at least 6 characters
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="firstName">FirstName</label>
-                <input type="text" class="form-control" formControlName="firstName" />
-                <div class="alert-danger" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
-                    <div *ngIf="firstName.errors.required">FirstName is required</div>
-                    <div *ngIf="firstName.errors.minlength">
-                        FirstName must be at least 6 characters
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastName">LastName</label>
-                <input type="text" class="form-control" formControlName="lastName" />
-                <div class="alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-                    <div *ngIf="lastName.errors.required">LastName is required</div>
-                    <div *ngIf="lastName.errors.minlength">
-                        LastName must be at least 6 characters
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" formControlName="email" />
-                <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
-                    <div *ngIf="email.errors.required">Email is required</div>
-                    <div *ngIf="email.errors.email">
-                        Email must be a valid email address
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" formControlName="password" />
-                <div class="alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
-                    <div *ngIf="password.errors.required">Password is required</div>
-                    <div *ngIf="password.errors.minlength">
-                        Password must be at least 6 characters
-                    </div>
-                </div>
-            </div>
+<div class="container">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Register</h1>
+  </div>
 
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword" />
-                <div class="alert-danger"
-                    *ngIf="!registerForm?.errors.passwordMatch && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
-                    <div *ngIf="confirmPassword.errors.required">Password is required</div>
-                    <div *ngIf="confirmPassword.errors.minlength">
-                        Password must be at least 6 characters
-                    </div>
-                    <div *ngIf="!registerForm.errors.passwordMatch">Password and Confirm Password must be
-                        match.</div>
-                </div>
-            </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="card col-md-6 col-sm-12">
+      <div class="card-body">
+        <h5 class="card-title">Register</h5>
 
-            <div class="form-group">
-                <button class="btn btn-primary btn-block">Sign Up</button>
-            </div>
-
-            <div class="alert alert-warning" *ngIf="isSubmitted && isSignUpFailed">
-                Signup failed!<br />
-                {{ errorMessage }}
-            </div>
-        </form>
-
-        <div class="alert alert-success" *ngIf="isSuccessful">
-            Your registration is successful!
+        <div class="alert alert-danger" *ngIf="isSubmitted && isSignUpFailed">
+          Register failed!<br />
+          {{ errorMessage }}
         </div>
+
+        <form class="mt-3" [formGroup]="registerForm" *ngIf="!isSuccessful"
+          (ngSubmit)="registerForm.valid && onSubmit()">
+          <div class="row g-3">
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="text"
+                  [ngClass]="{
+                          'form-control': true, 
+                          'is-invalid': userName.invalid && (userName.dirty || userName.touched) && userName.errors.required}"
+                  name="userName" formControlName="userName" />
+                <label for="userName">Username</label>
+                <div class="invalid-feedback" *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+                  <span *ngIf="userName.errors.required">Username is required</span>
+                  <span *ngIf="userName.errors.minlength">
+                    Username must be at least 6 characters
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="text"
+                  [ngClass]="{
+                          'form-control': true, 
+                          'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched) && firstName.errors.required}"
+                  name="firstName" formControlName="firstName" />
+                <label for="firstName">FirstName</label>
+                <div class="invalid-feedback" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                  <span *ngIf="firstName.errors.required">FirstName is required</span>
+                  <span *ngIf="firstName.errors.minlength">
+                    FirstName must be at least 6 characters
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="lastName"
+                  [ngClass]="{
+                          'form-control': true, 
+                          'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched) && lastName.errors.required}"
+                  name="lastName" formControlName="lastName" />
+                <label for="lastName">LastName</label>
+                <div class="invalid-feedback" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                  <span *ngIf="lastName.errors.required">LastName is required</span>
+                  <span *ngIf="lastName.errors.minlength">
+                    LastName must be at least 6 characters
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="email" [ngClass]="{
+                      'form-control': true, 
+                      'is-invalid': email.invalid && (email.dirty || email.touched) && email.errors.required}"
+                  name="email" formControlName="email" />
+                <label for="email">Email</label>
+                <div class="invalid-feedback" *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <span *ngIf="email.errors.required">Email is required</span>
+                  <span *ngIf="email.errors.email">
+                    Email must be a valid email address
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="password"
+                  [ngClass]="{
+                      'form-control': true, 
+                      'is-invalid': password.invalid && (password.dirty || password.touched) && password.errors.required
+                    }" name="password"
+                  formControlName="password" />
+                <label for="password">Password</label>
+                <div class="invalid-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+                  <span *ngIf="password.errors.required">Password is required</span>
+                  <span *ngIf="password.errors.minlength">
+                    Password must be at least 6 characters
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="password"
+                  [ngClass]="{
+                      'form-control': true, 
+                      'is-invalid': confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched) && confirmPassword.errors.required
+                    }"
+                  name="confirmPassword" formControlName="confirmPassword" />
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="invalid-feedback"
+                  *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                  <span *ngIf="confirmPassword.errors.required">Password is required</span>
+                  <span *ngIf="confirmPassword.errors.minlength">
+                    Confirm Password must be at least 6 characters
+                  </span>
+                  <span *ngIf="!registerForm.errors?.passwordMatch">Password and Confirm Password must be
+                    match.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
